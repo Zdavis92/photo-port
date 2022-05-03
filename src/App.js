@@ -16,19 +16,28 @@ function App() {
   ]);
 
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
+  const [contactSelected, setContactSelected] = useState(false);
 
   return (
     <div>
       <Nav
-      categories={categories}
-      setCurrentCategory={setCurrentCategory}
-      currentCategory={currentCategory}
+        categories={categories}
+        setCurrentCategory={setCurrentCategory}
+        currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <ContactForm></ContactForm>
-        <Gallery
-        currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {!contactSelected ? (
+          // The <> and </> are called react fragments and allow you to wrap elements without creating extra DOM nodes like a <div>
+          <>
+            <Gallery
+              currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );
